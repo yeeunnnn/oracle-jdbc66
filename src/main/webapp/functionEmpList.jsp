@@ -19,7 +19,7 @@
 	}
 	int rowPerPage = 10;
 	int beginRow = (currentPage-1) * rowPerPage + 1; //10개씩 페이징하는 것의 첫번째 글자.
-	int endRow = beginRow + (rowPerPage - 1);
+	int endRow = beginRow + (rowPerPage - 1); //1~'10' 11~'20' ... 마지막이 10씩 끊어지도록 설정
 	
 	String totalRowSql = "select count(*) from employees";
 	PreparedStatement totalRowStmt = conn.prepareStatement(totalRowSql);
@@ -129,6 +129,7 @@
 			
 			int minPage = (((currentPage - 1) / pagePerPage) * pagePerPage) + 1;
 			int maxPage = minPage + (pagePerPage - 1);
+			
 			if(maxPage > lastPage){ //ex. 실제는 15p인데 20p까지 나오면 안되기 때문에.
 				maxPage = lastPage;
 			}
